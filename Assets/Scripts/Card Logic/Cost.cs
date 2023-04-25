@@ -7,4 +7,8 @@ public class Cost {
     public List<Effect> Effects;
     public ManaCost ManaCost;
 
+    public Cost Copy() {
+        return (Cost)this.MemberwiseClone();
+    }
+
 }

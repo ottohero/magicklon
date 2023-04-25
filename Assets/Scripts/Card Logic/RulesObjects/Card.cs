@@ -16,9 +16,9 @@ public class Card : RulesObject {
 
         this.Name = name;
 
-        this.ManaCost = manaCost ?? new ManaCost(new Mana());
+        this.ManaCost = manaCost;
 
-        this.CardTypes = cardTypes ?? new CardTypes();
+        this.CardTypes = cardTypes;
 
         this.Abilities = abilities ?? new List<Ability>();
 

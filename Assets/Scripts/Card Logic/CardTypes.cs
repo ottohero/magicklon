@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardTypes {
-    public List<Supertype> Supertypes;
-    public List<CardType> Types;
-    public List<CreatureType> CreatureTypes;
-    public List<LandType> LandTypes;
+    public List<Supertype> Supertypes = new List<Supertype>();
+    public List<CardType> Types = new List<CardType>();
+    public List<CreatureType> CreatureTypes = new List<CreatureType>();
+    public List<LandType> LandTypes = new List<LandType>();
 
     public CardTypes(List<Supertype> supertypes, List<CardType> types, List<CreatureType> creatureTypes, List<LandType> landTypes) {
         this.Supertypes = supertypes ?? new List<Supertype>();
@@ -15,8 +15,6 @@ public class CardTypes {
         this.CreatureTypes = creatureTypes ?? new List<CreatureType>();
         this.LandTypes = landTypes ?? new List<LandType>();
     }
-
-    public CardTypes() : this(null, null, null, null) { }
 
     public override string ToString() {
         string output = "";
@@ -41,6 +39,10 @@ public class CardTypes {
             output += " ";
         }
         return output;
+    }
+
+    public CardTypes Copy() {
+        return (CardTypes)this.MemberwiseClone();
     }
 }
 

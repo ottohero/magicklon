@@ -11,4 +11,11 @@ public class AcitvatedAbility : Ability {
 
         this.Cost = cost;
     }
+
+    override public Ability Copy() {
+        AcitvatedAbility other = (AcitvatedAbility)this.MemberwiseClone();
+
+        other.Cost = this.Cost.Copy();
+        return other;
+    }
 }

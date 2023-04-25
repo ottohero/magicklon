@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -43,6 +44,22 @@ public class GameState {
             AllZones.Add(IndividualZones[p].Graveyard);
         }
         return AllZones;
+    }
+
+    public GameState Copy() {
+        GameState other = new GameState(this.Players.Count);
+
+        this.Players.Zip(other.Players, (thisPlayer, otherPlayer) => { otherPlayer = thisPlayer.Copy(); return thisPlayer; });
+
+        other.IndividualZones = new Dictionary<Player, PlayerZones>();
+
+        other.Players.Zip(this.IndividualZones.Values, (player, playerZones) => { other.IndividualZones.Add(player, playerZones.Copy()); return player; });
+
+        other.Battlefield = this.Battlefield.Copy();
+        other.Stack = this.Stack.Copy();
+        other.Exile = this.Exile.Copy();
+
+        return other;
     }
 
 }

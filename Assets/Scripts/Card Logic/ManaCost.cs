@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class ManaCost {
+public struct ManaCost {
     public Mana mana;
 
     public ManaCost(Mana mana) {

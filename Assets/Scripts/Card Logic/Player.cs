@@ -9,4 +9,8 @@ public class Player {
     public Player() {
         this.Life = 20;
     }
+
+    public Player Copy() {
+        return (Player)this.MemberwiseClone();
+    }
 }

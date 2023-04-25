@@ -33,4 +33,17 @@ public abstract class RulesObject {
 
         return output;
     }
+
+    public RulesObject Copy() {
+        RulesObject other = (RulesObject)this.MemberwiseClone();
+
+        other.CardTypes = this.CardTypes?.Copy();
+
+        other.Abilities = new List<Ability>();
+        this.Abilities.ForEach((ability) => other.Abilities.Add(ability.Copy()));
+
+        other.Owner = this.Owner.Copy();
+
+        return other;
+    }
 }

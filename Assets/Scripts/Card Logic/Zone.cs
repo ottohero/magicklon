@@ -11,7 +11,7 @@ public enum ZoneType {
     Stack,
     Exile
 }
-public struct Zone {
+public class Zone {
     public List<RulesObject> ZoneList;
     public bool Hidden;
 
@@ -21,9 +21,17 @@ public struct Zone {
         this.ZoneList = new List<RulesObject>();
         this.Hidden = false;
     }
+
+    public Zone Copy() {
+        Zone other = (Zone)this.MemberwiseClone();
+        other.ZoneList = new List<RulesObject>();
+        this.ZoneList.ForEach((ro) => other.ZoneList.Add(ro.Copy()));
+
+        return other;
+    }
 }
 
-public struct PlayerZones {
+public class PlayerZones {
     public Zone Library;
     public Zone Hand;
     public Zone Graveyard;
@@ -32,5 +40,13 @@ public struct PlayerZones {
         this.Library = new Zone();
         this.Hand = new Zone();
         this.Graveyard = new Zone();
+    }
+
+    public PlayerZones Copy() {
+        PlayerZones other = new PlayerZones();
+        other.Library = this.Library.Copy();
+        other.Hand = this.Hand.Copy();
+        other.Graveyard = this.Graveyard.Copy();
+        return other;
     }
 }

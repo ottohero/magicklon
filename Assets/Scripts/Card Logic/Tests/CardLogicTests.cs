@@ -20,7 +20,7 @@ namespace Tests {
 
             Player player = gameState.Players[0];
 
-            Card testCard = new Card(player, "Ornithopter", null, null, null, null, null);
+            Card testCard = new Card(player, "Ornithopter", new ManaCost(), null, null, null, null);
             Debug.Log(testCard);
 
             testCard = new Card(player,
@@ -34,6 +34,30 @@ namespace Tests {
 
             Permanent testPermanent = new Permanent(player, player, testCard);
             Debug.Log(testPermanent);
+        }
+
+        [Test]
+        public void CopyTests() {
+            GameState gameState = new GameState(1);
+
+            Player player = gameState.Players[0];
+            Card testCard = new Card(player, "Ornithopter", new ManaCost(), null, null, null, null);
+
+            Permanent testPermanent = new Permanent(player, player, testCard);
+
+            gameState.Battlefield.ZoneList.Add(testPermanent);
+
+            GameState copy = gameState.Copy();
+
+            RulesObject ornithopter = gameState.Battlefield.ZoneList.Find((RulesObject ro) => { return ro.Name == "Ornithopter"; });
+            ornithopter.Name = "Birds of Paradise";
+
+            List<string> names = new List<string>();
+
+            gameState.Battlefield.ZoneList.ForEach((RulesObject ro) => { Debug.Log(ro.Name); names.Add(ro.Name); });
+            copy.Battlefield.ZoneList.ForEach((RulesObject ro) => { Debug.Log(ro.Name); names.Add(ro.Name); });
+
+            StringAssert.AreNotEqualIgnoringCase(names[0], names[1]);
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

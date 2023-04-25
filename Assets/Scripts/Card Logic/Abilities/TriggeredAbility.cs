@@ -23,4 +23,10 @@ public class TriggeredAbility : Ability {
         return new List<Effect>();
     }
 
+    override public Ability Copy() {
+        TriggeredAbility other = (TriggeredAbility)this.MemberwiseClone();
+
+        return other;
+    }
+
 }
